@@ -1,10 +1,11 @@
 const express = require('express');
-const { Together} = require('together-ai');
+const {Together} = require('together-ai');
 const router = express.Router();
 
 const together = new Together({
     apiKey: process.env.TOGETHER_API_KEY,
 });
+
 
 router.post('/translation', async(req, res) => {
 
@@ -52,5 +53,6 @@ router.post('/translation', async(req, res) => {
         res.status(500).json({error: 'Failed to generate translated response'});
     }
 })
+
 
 module.exports = router;
