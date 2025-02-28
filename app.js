@@ -1,8 +1,23 @@
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors");
 
 const app = express();
 const port = 3000;
+
+const corsOptions = {
+  origin: '*', 
+  methods: 'POST',
+  allowedHeaders: 'Content-Type,Authorization',
+  exposedHeaders: 'Content-Length,X-Requested-With',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+
+app.options('*', cors(corsOptions));
+
 
 app.get('/', (req, res) => {
     res.send('Server is running');
@@ -11,12 +26,9 @@ app.get('/', (req, res) => {
 app.use(express.json());
 
 const translationRequest = require('./routes/api/v1/gen/communication');
-const rewardsRequest = require('./routes/api/v1/gen/contreebute');
-const askAI = require('./routes/api/v1/gen/questions');
 
 app.use('/', translationRequest);
-app.use('/', rewardsRequest);
-app.use('/', askAI);
+
 
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);

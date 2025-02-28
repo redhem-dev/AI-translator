@@ -16,7 +16,8 @@ router.post('/translation', async(req, res) => {
     In the following prompt you will be provided with the 
     text that needs to be translated from one language to 
     the other, following context which will also be provided
-    in the following prompts. Do not hallucinate.`;
+    in the following prompts. Make sure not to give any '+' signs
+    in reponse since they will end with error. Do not hallucinate.`;
 
 
     const user_prompt = 
